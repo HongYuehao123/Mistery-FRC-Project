@@ -145,18 +145,18 @@ def getOPR(match, weighted, auth_key):
     
     return totalOPR, teleopOPR, autoOPR
 
-def FRCOPR():
-    match = input("Enter your desired event Key: ")
-    auth_key = input("Enter your API key: ")
-
+def FRCOPR(match, auth_key):
     try:
         totalOPR, teleopOPR, autoOPR = getOPR(match, True, auth_key)
+        result = ""
 
         for team, score in sorted(totalOPR.items(), key=lambda x: -x[1]):
             totalScore = totalOPR.get(team, 0)
             teleopScore = teleopOPR.get(team, 0)
             autoScore = autoOPR.get(team, 0)
-            print(f"Team {team}: totalOPR = {totalScore:.2f}, teleopOPR = {teleopScore:.2f}, autoOPR = {autoScore:.2f}")
+            result += f"Team {team}: totalOPR = {totalScore:.2f}, teleopOPR = {teleopScore:.2f}, autoOPR = {autoScore:.2f} \n"
+            
+        return result
 
     except Exception as e:
         print(f"Error: {e}")
